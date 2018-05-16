@@ -15,6 +15,11 @@
     // Route::get('/',['uses'=>'SignaliController@index', 'as'=>'home']);
 
     // Route::get('/restrict',['uses'=>'SignaliController@restrict', 'as'=>'restrict']);
+
+    Route::controller('datatables', 'DatatablesController', [
+        'anyData'  => 'datatables.data',
+        'getIndex' => 'datatables',
+    ]);
     
     Route::get('/podelenie_autocomplete', ['uses' => 'AotocompleteController@podelenie_autocomplete', 'as' => 'podelenie_autocomplete' ]);
 

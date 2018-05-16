@@ -19,7 +19,7 @@ class SignaliController extends Controller
  
     public function index(Request $request, IagSession $iagsession){
         
-        dump(Session::all());
+        // dump(Session::all());
 
         $data = [
             'title' => 'Тел. 112 - Начало',
