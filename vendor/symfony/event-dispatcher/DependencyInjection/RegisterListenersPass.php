@@ -24,14 +24,24 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class RegisterListenersPass implements CompilerPassInterface
 {
+    /**
+     * @var string
+     */
     protected $dispatcherService;
-    protected $listenerTag;
-    protected $subscriberTag;
-
-    private $hotPathEvents = array();
-    private $hotPathTagName;
 
     /**
+     * @var string
+     */
+    protected $listenerTag;
+
+    /**
+     * @var string
+     */
+    protected $subscriberTag;
+
+    /**
+     * Constructor.
+     *
      * @param string $dispatcherService Service name of the event dispatcher in processed container
      * @param string $listenerTag       Tag name used for listener
      * @param string $subscriberTag     Tag name used for subscribers
@@ -43,14 +53,6 @@ class RegisterListenersPass implements CompilerPassInterface
         $this->subscriberTag = $subscriberTag;
     }
 
-    public function setHotPathEvents(array $hotPathEvents, $tagName = 'container.hot_path')
-    {
-        $this->hotPathEvents = array_flip($hotPathEvents);
-        $this->hotPathTagName = $tagName;
-
-        return $this;
-    }
-
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->dispatcherService) && !$container->hasAlias($this->dispatcherService)) {
@@ -60,6 +62,8 @@ class RegisterListenersPass implements CompilerPassInterface
         $definition = $container->findDefinition($this->dispatcherService);
 
         foreach ($container->findTaggedServiceIds($this->listenerTag, true) as $id => $events) {
+            $def = $container->getDefinition($id);
+
             foreach ($events as $event) {
                 $priority = isset($event['priority']) ? $event['priority'] : 0;
 
@@ -76,10 +80,6 @@ class RegisterListenersPass implements CompilerPassInterface
                 }
 
                 $definition->addMethodCall('addListener', array($event['event'], array(new ServiceClosureArgument(new Reference($id)), $event['method']), $priority));
-
-                if (isset($this->hotPathEvents[$event['event']])) {
-                    $container->getDefinition($id)->addTag($this->hotPathTagName);
-                }
             }
         }
 
@@ -89,25 +89,23 @@ class RegisterListenersPass implements CompilerPassInterface
             $def = $container->getDefinition($id);
 
             // We must assume that the class value has been correctly filled, even if the service is created by a factory
-            $class = $def->getClass();
+            $class = $container->getParameterBag()->resolveValue($def->getClass());
+            $interface = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
 
-            if (!$r = $container->getReflectionClass($class)) {
-                throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+            if (!is_subclass_of($class, $interface)) {
+                if (!class_exists($class, false)) {
+                    throw new InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                }
+
+                throw new InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
-            if (!$r->isSubclassOf(EventSubscriberInterface::class)) {
-                throw new InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, EventSubscriberInterface::class));
-            }
-            $class = $r->name;
+            $container->addObjectResource($class);
 
             ExtractingEventDispatcher::$subscriber = $class;
             $extractingDispatcher->addSubscriber($extractingDispatcher);
             foreach ($extractingDispatcher->listeners as $args) {
                 $args[1] = array(new ServiceClosureArgument(new Reference($id)), $args[1]);
                 $definition->addMethodCall('addListener', $args);
-
-                if (isset($this->hotPathEvents[$args[0]])) {
-                    $container->getDefinition($id)->addTag('container.hot_path');
-                }
             }
             $extractingDispatcher->listeners = array();
         }
