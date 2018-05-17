@@ -14,6 +14,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\DatatablesController' => $baseDir . '/app/Http/Controllers/DatatablesController.php',
     'App\\Http\\Controllers\\LogoutController' => $baseDir . '/app/Http/Controllers/LogoutController.php',
     'App\\Http\\Controllers\\SignaliController' => $baseDir . '/app/Http/Controllers/SignaliController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

@@ -53,19 +53,19 @@
         "language":{
           "url":"https://cdn.datatables.net/plug-ins/1.10.16/i18n/Bulgarian.json",
         },
-        "ajax": '{!! route('datatables.data') !!}',  
+        "ajax": "{!! route('datatables.data', ['ap'=> 111 ]) !!}",  
         "order": [[ 0, "desc" ]],
         //"scrollX" : "100%",
         //"scrollY" : 600,	
         "pageLength": 25,
         columns: [
                   { data: 'id', name: 'id' },
-                  { data: 'signalfrom', name: 'signalfrom' },
                   { data: 'pod_id', name: 'pod_id' },
                   { data: 'glav_pod', name: 'glav_pod' },
-                  { data: 'signaldate', name: 'signaldate' },
                   { data: 'name', name: 'name' },
-                  { data: 'phone', name: 'phone' }
+                  { data: 'phone', name: 'phone' },
+                  { data: 'signaldate', name: 'signaldate' },
+                  { data: 'opisanie', name: 'opisanie' },
               ]
       } );
 

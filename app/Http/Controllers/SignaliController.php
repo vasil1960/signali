@@ -17,9 +17,9 @@ use Session;
 class SignaliController extends Controller
 {
  
-    public function index(Request $request, IagSession $iagsession){
+    public function index(Request $request){
         
-        // dump(Session::all());
+        dump(Session::all());
 
         $data = [
             'title' => 'Тел. 112 - Начало',
