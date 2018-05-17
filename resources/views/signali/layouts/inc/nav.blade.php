@@ -26,12 +26,16 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('datatables', ['sid'=>$sid] ) }}">Всички сигнали</a>
+                <a class="nav-link" href="{{ route('create', ['sid'=>$sid]) }}">Нов сигнал</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('create', ['sid'=>$sid]) }}">Нов сигнал</a>
+                    <a class="nav-link" href="{{ route('datatables', ['sid'=>$sid]) }}">Всички сигнали</a>
             </li>
+
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('vasil', ['sid'=>$sid]) }}">Vasil</a>
+            </li> --}}
 
             
         </ul>

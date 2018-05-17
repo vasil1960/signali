@@ -53,7 +53,7 @@
         "language":{
           "url":"https://cdn.datatables.net/plug-ins/1.10.16/i18n/Bulgarian.json",
         },
-        "ajax": "{!! route('datatables.data', ['ap'=> 111 ]) !!}",  
+        "ajax": "{!! route('datatables.data',['ap'=> 104]) !!}",  
         "order": [[ 0, "desc" ]],
         //"scrollX" : "100%",
         //"scrollY" : 600,	

@@ -42,6 +42,8 @@
         
         Route::get('signali', ['uses'=>'SignaliController@show', 'as'=>'signali']);
 
+        // Route::get('vasil', ['uses'=>'SignaliController@vasil', 'as'=>'vasil']);
+
         Route::get('create', ['uses'=>'SignaliController@create', 'as'=>'create']);
 
         Route::post('create', 'SignaliController@store');

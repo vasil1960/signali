@@ -22,29 +22,35 @@
 
 //  $table = <<<EOT
 //  (
-//     SELECT 
-//       a.id, 
-//       a.name, 
-//       a.father_id, 
+//     SELECT
+//       a.id,
+//       a.name,
+//       a.father_id,
 //       b.name AS father_name
 //     FROM table a
 //     LEFT JOIN table b ON a.father_id = b.id
 //  ) temp
 // EOT;
 
+// if(isset($_GET['ap']))
+// {
+// $ap = $_GET['ap'];
+// };
+
  $table = <<<SQL
  (
-	SELECT 
+	SELECT
 	s.id,
 	s.name,
 	s.phone,
 	s.opisanie,
 	s.signaldate,
-	pod.Pod_NameBg DGS, 
+	pod.Pod_NameBg DGS,
 	rdg.Pod_NameBg RDG
 	FROM signali as s
 	INNER JOIN nug.podelenia as pod	ON pod.Pod_Id = s.pod_id
 	INNER JOIN nug.podelenia as rdg	ON rdg.Pod_Id = s.glav_pod
+  -- WHERE s.pod_id = $ap
 ) temp
 SQL;
 // var_dump($table);
@@ -67,7 +73,7 @@ $columns = array(
 		),
 	array( 'db' => 'DGS',        'dt' => 1 ),
 	array( 'db' => 'RDG',        'dt' => 2 ),
-		
+
 );
 
 // SQL server connection information

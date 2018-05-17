@@ -46,7 +46,7 @@ class DatatablesController extends Controller
     // INNER JOIN nug.podelenia as rdg	ON rdg.Pod_Id = s.glav_pod
     
 
-    public function anyData($ap){
+    public function anyData($ap = 110){
 
         // $iagsession = new IagSession();
         
@@ -64,7 +64,11 @@ class DatatablesController extends Controller
         //     ->join('nug.podelenia as rdg','rdg.Pod_Id','=','s.glav_pod')
         //     ->select(['s.id as id','s.name as name','s.phone as phone','s.opisanie as opisanie','s.signaldate as signaldate','s.signalfrom as signalfrom','pod.Pod_NameBg as DGS','rdg.Pod_NameBg as RDG']);
 
-        return Datatables::of($signali)->make(true);
+        return Datatables::of($signali)
+            // ->filterColumn('pod_id', function($query, $keyword = 104) {
+            //     $query->where("pod_id =  ?", ["{$keyword}"]);
+            // })
+            ->make(true);
 
     }
 }

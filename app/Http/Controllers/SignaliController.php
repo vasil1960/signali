@@ -17,7 +17,7 @@ use Session;
 class SignaliController extends Controller
 {
  
-    public function index(Request $request){
+    public function index(Request $request, IagSession $iagsession){
         
         dump(Session::all());
 
@@ -44,7 +44,7 @@ class SignaliController extends Controller
             'jumbotron_title' => 'Сигнали',
             'jumbotrontext'=> 'Всички сигнали получени чрез тел. 112',
             // 'signali' => $signali,
-            'sid' => $request->session()->get('sid')
+            'sid' => $request->session()->get('sid'),
         ];
         
         return view( 'signali.show', $data );
@@ -96,7 +96,7 @@ class SignaliController extends Controller
         return view( 'signali.create', $data );
     }
 
-     public function restrict(Request $request){
+    public function restrict(Request $request){
 
         $data = [
             'title' => 'Тел. 112 - Без права',
@@ -107,5 +107,6 @@ class SignaliController extends Controller
         
         return view( 'signali.restrict', $data );
     }
+
 
 }

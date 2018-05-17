@@ -19,21 +19,25 @@
           <th scope="col">Телефон</th>
           <th scope="col">Дата</th>
           <th scope="col">Описание</th>                 
-          <th scope="col"></th>  
+          {{--  <th scope="col"></th>    --}}
         </tr>
       </thead>
-      <tfoot class="thead">
-        <tr>
-          <th scope="col">№</th>
-          <th scope="col">Поделение</th>
-          <th scope="col">РДГ</th>
-          <th scope="col">Име</th>
-          <th scope="col">Телефон</th>
-          <th scope="col">Дата</th>
-          <th scope="col">Описание</th>                    
-          <th scope="col"></th>
-        </tr>
-      </tfoot>
+      <tbody class="thead">
+
+          @foreach ($signali as $signal )
+            <tr>
+              <td scope="col">{{ $signal->id }}</td>
+              <td scope="col">{{ $signal->pod_id }}</td>
+              <td scope="col">{{ $signal->glav_pod}}</td>
+              <td scope="col">{{ $signal->name }}</td>
+              <td scope="col">{{ $signal->phone }}</td>
+              <td scope="col">{{ $signal->signaldate }}</td>
+              <td scope="col">{{ $signal->opisanie }}</td>                    
+              {{--  <th scope="col"></th>  --}}
+            </tr>
+          @endforeach
+
+      </tbody>
     </table>
   </div>
   
@@ -45,38 +49,30 @@
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     
   <script type="text/javascript" language="javascript" charset="utf8" class="init">
+
     $(document).ready(function() {
       $('#signali').DataTable( {
-        "processing": true,
-        "serverSide": true,
+        //"processing": true,
+        //"serverSide": true,
         "language":{
           "url":"https://cdn.datatables.net/plug-ins/1.10.16/i18n/Bulgarian.json",
         },
-        "ajax": "{{ asset('assets/scripts/server_processing.php?ap=') }}{{ Session::get('AccessPodelenia') }}",  
-        "order": [[ 0, "desc" ]],
+        //"ajax": "{!! route('datatables.data') !!}",  
+        //"order": [[ 0, "desc" ]],
         //"scrollX" : "100%",
         //"scrollY" : 600,	
         "pageLength": 25,
-        "columnDefs": [
-            {
-              targets: 7,
-              visible:true,
-              sortable:false,
-              render:function(data, type, row, meta)
-              {
-                return "<a class='btn btn-outline-info' href='signal/" + row[0] + "/?sid={{ Session::get('sid') }}'>Още...</a>";
-              }
-            }
-        ]
+        //columns: [
+        //          { data: 'id', name: 'id' },
+        //          { data: 'pod_id', name: 'pod_id' },
+        //          { data: 'glav_pod', name: 'glav_pod' },
+        //          { data: 'name', name: 'name' },
+        //          { data: 'phone', name: 'phone' },
+        //         { data: 'signaldate', name: 'signaldate' },
+        //          { data: 'opisanie', name: 'opisanie' },
+        //      ]
       } );
 
-
-      var table = $('#signali').DataTable();
-      $('#signali tbody').on('click','tr', function(){
-          var d = table.row(this).data();
-          //d.counter++;
-          console.log(d);
-      });
     } );
   </script>
 @endsection
