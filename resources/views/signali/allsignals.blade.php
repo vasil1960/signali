@@ -19,7 +19,7 @@
           <th scope="col">Телефон</th>
           <th scope="col">Дата</th>
           <th scope="col">Описание</th>                 
-          {{--  <th scope="col"></th>    --}}
+          <th scope="col"></th>  
         </tr>
       </thead>
       <tfoot class="thead">
@@ -31,7 +31,7 @@
           <th scope="col">Телефон</th>
           <th scope="col">Дата</th>
           <th scope="col">Описание</th>                    
-          {{--  <th scope="col"></th>  --}}
+          <th scope="col"></th>
         </tr>
       </tfoot>
     </table>
@@ -53,19 +53,27 @@
         "language":{
           "url":"https://cdn.datatables.net/plug-ins/1.10.16/i18n/Bulgarian.json",
         },
-        "ajax": "{!! route('datatables.data',['ap'=> 104]) !!}",  
+       // "ajax": "{!! route('datatables.data') !!}",  
+       "ajax": {
+					"url":"{!! route('datatables.data') !!}",
+					"dataType":"json",
+					"type":"POST",
+					"data":{"_token":"{!! csrf_token() !!}"}
+				},
+
         "order": [[ 0, "desc" ]],
         //"scrollX" : "100%",
-        //"scrollY" : 600,	
+        //"scrollY" : 600,	s
         "pageLength": 25,
-        columns: [
-                  { data: 'id', name: 'id' },
-                  { data: 'pod_id', name: 'pod_id' },
-                  { data: 'glav_pod', name: 'glav_pod' },
-                  { data: 'name', name: 'name' },
-                  { data: 'phone', name: 'phone' },
-                  { data: 'signaldate', name: 'signaldate' },
-                  { data: 'opisanie', name: 'opisanie' },
+        "columns": [
+                  { "data": 'id' },
+                  { "data": 'pod_id' },
+                  { "data": 'glav_pod' },
+                  { "data": 'name' },
+                  { "data": 'phone' },
+                  { "data": 'signaldate' },
+                  { "data": 'opisanie'},
+                  { "data": 'action', searchable:false, orderable:false}
               ]
       } );
 

@@ -20,7 +20,7 @@
     
     Route::get('/podelenie_autocomplete', ['uses' => 'AotocompleteController@podelenie_autocomplete', 'as' => 'podelenie_autocomplete' ]);
 
-    Route::get('datatables.data/{ap}', 'DatatablesController@anyData')->name('datatables.data');
+    Route::post('datatables.data', 'DatatablesController@anyData')->name('datatables.data');
 
     
 
@@ -29,11 +29,6 @@
 
     Route::group(['middleware' => ['active_session']], function() {
             
-        //  Route::controller('datatables', 'DatatablesController', [
-        //         'anyData'  => 'datatables.data',
-        //         'getIndex' => 'datatables',
-        //     ]);
-
         Route::get('datatables', 'DatatablesController@getIndex')->name('datatables');
         
         Route::get('/',['uses'=>'SignaliController@index', 'as'=>'home']);
@@ -41,8 +36,6 @@
         Route::get('/logout', ['uses'=>'LogoutController@logout', 'as'=>'logout']);
         
         Route::get('signali', ['uses'=>'SignaliController@show', 'as'=>'signali']);
-
-        // Route::get('vasil', ['uses'=>'SignaliController@vasil', 'as'=>'vasil']);
 
         Route::get('create', ['uses'=>'SignaliController@create', 'as'=>'create']);
 

@@ -16,6 +16,7 @@
 
       <!-- Bootstrap core CSS -->
       <link href="{{ asset('assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+      
 
       <!-- Custom styles for this template -->
       <link href="{{ asset('assets/dist/css/jumbotron.css') }}" rel="stylesheet">
