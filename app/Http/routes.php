@@ -11,21 +11,12 @@
 |
 */
     //
-
-    // Route::get('/',['uses'=>'SignaliController@index', 'as'=>'home']);
-
-    // Route::get('/restrict',['uses'=>'SignaliController@restrict', 'as'=>'restrict']);
-
-   
     
     Route::get('/podelenie_autocomplete', ['uses' => 'AotocompleteController@podelenie_autocomplete', 'as' => 'podelenie_autocomplete' ]);
 
     Route::post('datatables.data', 'DatatablesController@anyData')->name('datatables.data');
 
     
-
-    
-
 
     Route::group(['middleware' => ['active_session']], function() {
             

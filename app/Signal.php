@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Session;
+
 class Signal extends Model
 {
     protected $table = 'iag112new.signali';
@@ -18,5 +20,14 @@ class Signal extends Model
     public function rdg()
     {
         return $this->hasOne(Rdg::class,'Pod_Id','glav_pod');
+    }
+
+    public function scopePodid($query, $ap)
+    {
+        if($ap == 1){
+            return null;
+        }
+        
+        return $query->where('pod_id', '=', $ap);
     }
 }

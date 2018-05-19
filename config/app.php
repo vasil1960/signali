@@ -148,8 +148,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-	//Yajra\Datatables\DatatablesServiceProvider::class,
-
         /*
          * Application Service Providers...
          */

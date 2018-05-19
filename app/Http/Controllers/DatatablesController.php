@@ -17,32 +17,25 @@ use DB;
 class DatatablesController extends Controller
 {
     //
+    
     public function getIndex(Request $request){
-
-        // dump(Session::all());
 
         $data = [
             'title' => 'Тел. 112 - Всички сигнали',
             'jumbotron_title' => 'Сигнали',
             'jumbotrontext'=> 'Всички сигнали получени чрез тел. 112',
-            'sid' => $request->session()->get('sid')
-            // 'ap' => $request->session()->get('AccessPodelenia')
+            'sid' => $request->session()->get('sid'),
+            'ap' => $request->session()->get('AccessPodelenia')
         ];
 
         return view('signali.allsignals', $data);
     }
 
-    public function anyData(Request $request){
+   
+   
+    public function anyData( Request $request){
 
-        // $ap = Session::get('AccessPodelenia');
-
-        // Iag potrebitel
-        // if($ap == 1){
-        //     $signali = Signal::select(['id','pod_id','glav_pod','name','phone','signaldate','opisanie']);  
-        // }
-
-        // // Drugi potrebiteli
-        // $signali = Signal::where('glav_pod', $ap)->select(['id','pod_id','glav_pod','name','phone','signaldate','opisanie']);
+        $ap = $request->session()->get('AccessPodelenia');
          
         $columns = array(
 			0 => 'id',
@@ -54,22 +47,22 @@ class DatatablesController extends Controller
             6 => 'opisanie',
 		);
         
-		$totalData = Signal::count();
+		$totalData = Signal::podid($ap)->count();
 		$limit = $request->input('length');
 		$start = $request->input('start');
 		$order = $columns[$request->input('order.0.column')];
 		$dir = $request->input('order.0.dir');
 		
 		if(empty($request->input('search.value'))){
-			$posts = Signal::offset($start)
+			$posts = Signal::podid($ap)->offset($start)
 					->limit($limit)
 					->orderBy($order,$dir)
 					->get();
-			$totalFiltered = Signal::count();
+			$totalFiltered = Signal::podid($ap)->count();
 		}else{
             $search = $request->input('search.value');
             
-			$posts = Signal::where('id', 'like', "%{$search}%")
+			$posts = Signal::podid($ap)->where('id', 'like', "%{$search}%")
                                     ->orWhere('pod_id','like',"%{$search}%")
                                     ->orWhere('glav_pod','like',"%{$search}%")
                                     ->orWhere('name','like',"%{$search}%")
@@ -81,7 +74,7 @@ class DatatablesController extends Controller
                                     ->orderBy($order, $dir)
                                     ->get();
                             
-			$totalFiltered = Signal::where('id', 'like', "%{$search}%")
+			$totalFiltered = Signal::podid($ap)->where('id', 'like', "%{$search}%")
                                     ->orWhere('pod_id','like',"%{$search}%")
                                     ->orWhere('glav_pod','like',"%{$search}%")
                                     ->orWhere('name','like',"%{$search}%")

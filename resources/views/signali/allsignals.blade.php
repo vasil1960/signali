@@ -53,17 +53,18 @@
         "language":{
           "url":"https://cdn.datatables.net/plug-ins/1.10.16/i18n/Bulgarian.json",
         },
-       // "ajax": "{!! route('datatables.data') !!}",  
        "ajax": {
-					"url":"{!! route('datatables.data') !!}",
-					"dataType":"json",
+          "url":"{!! route('datatables.data') !!}",
+          "dataType":"json",
 					"type":"POST",
-					"data":{"_token":"{!! csrf_token() !!}"}
+					"data":{
+            "_token":"{!! csrf_token() !!}",
+            //"ap":"{!! Session::get('AccessPodelenia') !!}",
+            //"sid":"{!! Session::get('sid') !!}"
+          }
 				},
 
         "order": [[ 0, "desc" ]],
-        //"scrollX" : "100%",
-        //"scrollY" : 600,	s
         "pageLength": 25,
         "columns": [
                   { "data": 'id' },
