@@ -14,18 +14,38 @@ use App\IagSession;
 
 use Session;
 
+use App\Log;
+
 class SignaliController extends Controller
 {
  
+    public function write_log(Request $request, $action){
+       
+        $logs = new Log();
+        $logs->ip = $request->ip();
+        $logs->action = $action;
+        $logs->username = $request->session()->get('username');
+        $logs->name = $request->session()->get('FullName');
+        $logs->podelenie = $request->session()->get('Podelenie');
+        $logs->sid = $request->session()->get('sid');
+        $logs->selyear = $request->session()->get('SelYear');
+        $logs->save();
+
+    }
+    
+    
     public function index(Request $request, IagSession $iagsession){
+
+        // dump($request->session()->all());
 
         $data = [
             'title' => 'Тел. 112 - Начало',
             'jumbotron_title' => 'Начална страница',
             'jumbotrontext'=> '',
-            'sid' => $request->session()->get('sid'),
-            'ap' => $request->session()->get('AccessPodelenia')
+            'sid' => $request->session()->get('sid')
         ];
+
+        $this->write_log($request, 'Отваряне на начална страница');
 
         return view( 'signali.index', $data );
     } 
@@ -40,6 +60,8 @@ class SignaliController extends Controller
             'sid' => $request->session()->get('sid'),
         ];
         
+        $this->write_log($request, 'Отваряне на всички сигнали');
+
         return view( 'signali.show', $data );
     }
 
@@ -56,6 +78,8 @@ class SignaliController extends Controller
             'sid' => $request->session()->get('sid'),
         ];
         
+        $this->write_log($request, 'Разглеждане на сигнал №:'.$id);
+
         return view('signali.signal', $data);
     }
 
@@ -66,6 +90,8 @@ class SignaliController extends Controller
             'jumbotrontext'=> 'Въвеждане на нов сигнал',
             'sid' => $request->session()->get('sid'),
         ];
+
+        $this->write_log($request, 'Отваряне на форма за добавяне на нов сигнал');
         
         return view( 'signali.create', $data );
     }
@@ -78,6 +104,8 @@ class SignaliController extends Controller
             /////////////
             
             dump($request->all());
+
+            $this->write_log($request, 'Записване на нов сигнал в базата с данни');
         }
 
         $data = [

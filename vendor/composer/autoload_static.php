@@ -260,8 +260,8 @@ class ComposerStaticInit0a6458e7cf154265bf3bbb5856192c7d
     );
 
     public static $classMap = array (
-        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
+        'AddSidAndYearColumnsToSignaliLogsTable' => __DIR__ . '/../..' . '/database/migrations/2018_05_20_044756_add_sid_and_year_columns_to__signali_logs_table.php',
+        'CreateSignaliLogsTable' => __DIR__ . '/../..' . '/database/migrations/2018_05_20_033429_create_signali_logs_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
