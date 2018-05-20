@@ -47,6 +47,7 @@ class DatatablesController extends Controller
             6 => 'opisanie',
 		);
         
+        // podid() - scope signal model to global filter datatables by pod_id. (Signal model)
 		$totalData = Signal::podid($ap)->count();
 		$limit = $request->input('length');
 		$start = $request->input('start');

@@ -17,8 +17,8 @@
           <th scope="col">РДГ</th> 
           <th scope="col">Име</th>
           <th scope="col">Телефон</th>
-          <th scope="col">Дата</th>
-          <th scope="col">Описание</th>                 
+          <th scope="col">Дата</th>  
+          <th scope="col">Описание</th>              
           <th scope="col"></th>  
         </tr>
       </thead>
@@ -68,8 +68,8 @@
         "pageLength": 25,
         "columns": [
                   { "data": 'id' },
-                  { "data": 'pod_id' },
-                  { "data": 'glav_pod' },
+                  { "data": 'pod_id', searchable:false, orderable:false },
+                  { "data": 'glav_pod', searchable:false, orderable:false },
                   { "data": 'name' },
                   { "data": 'phone' },
                   { "data": 'signaldate' },
