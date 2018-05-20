@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\WriteLogos;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,26 +16,14 @@ use App\IagSession;
 
 use Session;
 
-use App\Log;
+use App\Logos;
+
 
 class SignaliController extends Controller
-{
- 
-    public function write_log(Request $request, $action){
-       
-        $logs = new Log();
-        $logs->ip = $request->ip();
-        $logs->action = $action;
-        $logs->username = $request->session()->get('username');
-        $logs->name = $request->session()->get('FullName');
-        $logs->podelenie = $request->session()->get('Podelenie');
-        $logs->sid = $request->session()->get('sid');
-        $logs->selyear = $request->session()->get('SelYear');
-        $logs->save();
+{   
+    use WriteLogos;
 
-    }
-    
-    
+
     public function index(Request $request, IagSession $iagsession){
 
         // dump($request->session()->all());
