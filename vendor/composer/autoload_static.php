@@ -260,6 +260,7 @@ class ComposerStaticInit0a6458e7cf154265bf3bbb5856192c7d
     );
 
     public static $classMap = array (
+        'AddNewColumnUserIdToSignaliLogsTable' => __DIR__ . '/../..' . '/database/migrations/2018_05_21_134054_add_new_column_userId_to_signali_logs_table.php',
         'AddSidAndYearColumnsToSignaliLogsTable' => __DIR__ . '/../..' . '/database/migrations/2018_05_20_044756_add_sid_and_year_columns_to__signali_logs_table.php',
         'CreateSignaliLogsTable' => __DIR__ . '/../..' . '/database/migrations/2018_05_20_033429_create_signali_logs_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

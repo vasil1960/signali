@@ -22,7 +22,7 @@ trait WriteLogos
         $logs->ip = $request->ip();
         $logs->action = $action;
         $logs->username = $request->session()->get('username');
-        $logs->username = $request->session()->get('username');
+        $logs->userId = $request->session()->get('userId');
         $logs->name = $request->session()->get('FullName');
         $logs->podelenie = $request->session()->get('Podelenie');
         $logs->sid = $request->session()->get('sid');

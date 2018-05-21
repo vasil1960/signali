@@ -20,26 +20,19 @@
 
     Route::group(['middleware' => ['active_session']], function() {
             
-        Route::get('datatables', 'DatatablesController@getIndex')->name('datatables');
-        
-        Route::get('/',['uses'=>'SignaliController@index', 'as'=>'home']);
+            Route::get('datatables', 'DatatablesController@getIndex')->name('datatables');
+            
+            Route::get('/',['uses'=>'SignaliController@index', 'as'=>'home']);
 
-        Route::get('/logout', ['uses'=>'LogoutController@logout', 'as'=>'logout']);
-        
-        Route::get('signali', ['uses'=>'SignaliController@show', 'as'=>'signali']);
+            Route::get('/logout', ['uses'=>'LogoutController@logout', 'as'=>'logout']);
+            
+            Route::get('signali', ['uses'=>'SignaliController@show', 'as'=>'signali']);
 
-        Route::get('create', ['uses'=>'SignaliController@create', 'as'=>'create']);
+            Route::get('create', ['uses'=>'SignaliController@create', 'as'=>'create']);
 
-        Route::post('create', 'SignaliController@store');
+            Route::post('create', 'SignaliController@store');
 
-        Route::get('/signal/{id}', ['uses'=>'SignaliController@show_one', 'as'=>'signal']);
+            Route::get('/signal/{id}', ['uses'=>'SignaliController@show_one', 'as'=>'signal']);
 
     });
-
-
-
-    
-
-
-
 

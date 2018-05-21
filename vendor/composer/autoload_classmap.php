@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddNewColumnUserIdToSignaliLogsTable' => $baseDir . '/database/migrations/2018_05_21_134054_add_new_column_userId_to_signali_logs_table.php',
     'AddSidAndYearColumnsToSignaliLogsTable' => $baseDir . '/database/migrations/2018_05_20_044756_add_sid_and_year_columns_to__signali_logs_table.php',
     'CreateSignaliLogsTable' => $baseDir . '/database/migrations/2018_05_20_033429_create_signali_logs_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
