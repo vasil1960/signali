@@ -65,7 +65,7 @@
         <div class="form-group row">
             <label for="name2" class="col-md-2 control-label">Подател:</label>
             <div class="col-md-10">
-                <input name="name" type="text" class="form-control" id="name2" placeholder="Подател на сигнала" value="{{ old('name') }}">
+                <input name="name" type="text" class="form-control" id="name" placeholder="Подател на сигнала" value="{{ old('name') }}">
             </div>
         </div>
 
@@ -140,12 +140,12 @@
         </div>
 
         <div class="form-group row">
-            <label for="send_extra" class="col-md-2 control-label">Предадено още на:</label>
+            <label for="send_to_extra" class="col-md-2 control-label">Предадено още на:</label>
             <div class="col-md-10">
-                <input  type="radio" name="send_extra" id="send_extra" value="0" @if (old('send_extra') == "0") {{ 'checked' }} @endif  />На никой
-                <input  type="radio" name="send_extra" id="send_extra" value="1" @if (old('send_extra') == "1") {{ 'checked' }} @endif />Полиция
-                <input  type="radio" name="send_extra" id="send_extra" value="2" @if (old('send_extra') == "2") {{ 'checked' }} @endif  />Пожарна
-                <input  type="radio" name="send_extra" id="send_extra" value="3" @if (old('send_extra') == "3") {{ 'checked' }} @endif />БАБХ
+                <input  type="radio" name="send_to_extra" id="send_extra" value="0" @if (old('send_to_extra') == "0") {{ 'checked' }} @endif  />На никой
+                <input  type="radio" name="send_to_extra" id="send_extra" value="1" @if (old('send_to_extra') == "1") {{ 'checked' }} @endif />Полиция
+                <input  type="radio" name="send_to_extra" id="send_extra" value="2" @if (old('send_to_extra') == "2") {{ 'checked' }} @endif  />Пожарна
+                <input  type="radio" name="send_to_extra" id="send_extra" value="3" @if (old('send_to_extra') == "3") {{ 'checked' }} @endif />БАБХ
             </div>
         </div>
 

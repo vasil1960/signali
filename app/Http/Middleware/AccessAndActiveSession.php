@@ -24,7 +24,7 @@ class AccessAndActiveSession
 
         $result = $iagsession->where('ID', $request->sid)->first();
 
-        // dump($result->iaguser->Name);
+        // dump($result->iaguser->Podelenie);
         
 
         if($result->ActiveSession !== 0 && $result->Access112 !== 0){
@@ -38,11 +38,12 @@ class AccessAndActiveSession
                         'Access'          => $result->Access,
                         'ActiveSession'   => $result->ActiveSession,
                         'FullName'        => $result->iaguser->Name .' '. $result->iaguser->Familia,
-                        'Podelenie'       => $result->iaguser->Podelenie
+                        'Podelenie'       => $result->iaguser->Podelenie,
+                        'userId'          => $result->userId
                     ]);
             return $next($request);
         }
-    // return redirect()->route('signali.restrict');
+    // return redirect()->route('home');
 
     abort(404);
         

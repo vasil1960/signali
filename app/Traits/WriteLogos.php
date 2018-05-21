@@ -6,20 +6,22 @@ use App\Traits\WriteLogos;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
 use App\Logos;
 
 
 trait WriteLogos
 {
-    //
     
-   public function write_log(Request $request, $action){
+    public function __construct(){
+        //
+    }
+   
+    public function write_log(Request $request, $action){
 
         $logs = new Logos();
         $logs->ip = $request->ip();
         $logs->action = $action;
+        $logs->username = $request->session()->get('username');
         $logs->username = $request->session()->get('username');
         $logs->name = $request->session()->get('FullName');
         $logs->podelenie = $request->session()->get('Podelenie');

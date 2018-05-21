@@ -12,6 +12,8 @@ class Signal extends Model
 
     protected $primaryKey = 'id';
 
+    public $timestamps = false;
+
     public function podelenie()
     {
         return $this->hasOne(Podelenia::class,'Pod_Id','pod_id');

@@ -18,6 +18,8 @@ use Session;
 
 use App\Logos;
 
+use App\Podelenia;
+
 
 class SignaliController extends Controller
 {   
@@ -26,6 +28,7 @@ class SignaliController extends Controller
 
     public function  __construct(){
         $this->sid = Session::get('sid');
+        $this->userId = Session::get('userId');
     }
 
     public function index(Request $request){
@@ -93,13 +96,37 @@ class SignaliController extends Controller
 
     public function store(AddSignaliRequest $request){
 
+        $podelenia  = Podelenia::where('Pod_Id', $request->pod_id)->first();
+
         if($request->isMethod('post')){
             
-            /////////////
+            $signal = new Signal;
+          
+            $signal->signalfrom    = $request->signalfrom;
+            $signal->signaldate    = $request->signaldate;
+            $signal->identnumber   = $request->identnumber;
+            $signal->pod_id        = $request->pod_id;
+            $signal->glav_pod      = $podelenia->Glav_Pod;
+            $signal->name          = $request->name;   
+            $signal->phone         = $request->phone;
+            $signal->narushenia    = $request->narushenia;
+            $signal->adress        = $request->adress;
+            $signal->opisanie      = $request->opisanie;
+            $signal->send_to       = $request->send_to;
+            $signal->send_to_extra = $request->send_to_extra;
+            $signal->deistvie      = $request->deistvie;
+            $signal->deistvie_date = $request->deistvie_date;
+            $signal->notes         = $request->notes;
+            $signal->policia       = $request->policia;
+            $signal->InsertUserID  = $this->userId;
+            $signal->InsertDate    = date('Y m d H:i:s');
             
-            dump($request->all());
+            $signal->save();
 
-            $this->write_log($request, 'Записване на нов сигнал в базата с данни');
+            $insertedId = $signal->id;
+            
+            $this->write_log($request, 'Записване на нов сигнал №: ' . $insertedId. ' в базата с данни');
+
         }
 
         $data = [
@@ -109,7 +136,11 @@ class SignaliController extends Controller
             'sid' => $this->sid
         ];
         
+       
+
         return view( 'signali.create', $data );
+
+        // return view( 'signali.create');
     }
 
     public function restrict(Request $request){

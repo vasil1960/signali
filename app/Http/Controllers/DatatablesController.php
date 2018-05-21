@@ -12,11 +12,16 @@ use Session;
 
 use App\Signal;
 
-use DB;
+// use DB;
 
 class DatatablesController extends Controller
 {
     //
+    
+    public function __construct(){
+        $this->sid = Session::get('sid');;
+        $this->ap = Session::get('AccessPodelenia');       
+    }
     
     public function getIndex(Request $request){
 
@@ -24,8 +29,7 @@ class DatatablesController extends Controller
             'title' => 'Тел. 112 - Всички сигнали',
             'jumbotron_title' => 'Сигнали',
             'jumbotrontext'=> 'Всички сигнали получени чрез тел. 112',
-            'sid' => $request->session()->get('sid'),
-            'ap' => $request->session()->get('AccessPodelenia')
+            'sid' => $this->sid,
         ];
 
         return view('signali.allsignals', $data);
@@ -35,7 +39,7 @@ class DatatablesController extends Controller
    
     public function anyData( Request $request){
 
-        $ap = $request->session()->get('AccessPodelenia');
+        $ap = $this->ap;
          
         $columns = array(
 			0 => 'id',
@@ -90,7 +94,7 @@ class DatatablesController extends Controller
 		if($posts){
 			foreach($posts as $r){
 				$nestedData['id'] = '
-                    <a href="signal/'.$r->id.'/?sid='.Session::get('sid').'" class="btn btn-outline-info btn-xs">'.$r->id .'</a>
+                    <a href="signal/'.$r->id.'/?sid=' . $this->sid . '" class="btn btn-outline-info btn-xs">'.$r->id .'</a>
 				';
                 $nestedData['pod_id'] = $r->podelenie->Pod_NameBg;
                 $nestedData['glav_pod'] = $r->rdg->Pod_NameBg;
@@ -99,7 +103,7 @@ class DatatablesController extends Controller
                 $nestedData['signaldate'] = date('d.m.Y H:i:s',strtotime($r->signaldate));
                 $nestedData['opisanie'] = $r->opisanie;
                 $nestedData['action'] = '
-                    <a href="signal/'.$r->id.'/?sid='.Session::get('sid').'" class="btn btn-outline-info btn-xs">Още..</a>
+                    <a href="signal/'.$r->id.'/?sid=' . $this->sid . '" class="btn btn-outline-info btn-xs">Още..</a>
 				';
 				$data[] = $nestedData;
 			}
