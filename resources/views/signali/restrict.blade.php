@@ -39,11 +39,18 @@
 
         <div class="container" style="padding: 10px">
 
-          @yield('content')
+          {{--  @yield('content')  --}}
+
+          {{--  <h4 style="text-align: center"><a href="https://system.iag.bg">Вход</a></h4>  --}}
+
+          
+            <div class="content text-danger text-center">
+                <div class="title">Нямате права за ползване на модула или сесията ви изтекла! </div>
+                <div class="content">Влезте отново от <a href="https://system.iag.bg">тук</a></div>
+            </div>
+    
 
         </div> <!-- /container -->
-
-     
 
     </main>
 

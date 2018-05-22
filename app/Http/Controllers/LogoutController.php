@@ -30,11 +30,13 @@ class LogoutController extends Controller
 
             $this->write_log($request, 'Изход от модула');
 
+            return redirect()->route('redirect',['sid' => $sid]);
+
             $request->session()->flush();
         }
-        // return redirect()->route('signali.restrict');
+        
 
-        return redirect('https://system.iag.bg');
+        // return redirect('https://system.iag.bg');
         // abort('404');
     }
 }

@@ -43,9 +43,9 @@ class AccessAndActiveSession
                     ]);
             return $next($request);
         }
-    // return redirect()->route('home');
+    return redirect()->route('redirect', ['sid'=>$result->ID]);
 
-    abort(404);
+    // abort(404);
         
     } 
 }

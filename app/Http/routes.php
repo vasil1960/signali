@@ -16,6 +16,8 @@
 
     Route::post('datatables.data', 'DatatablesController@anyData')->name('datatables.data');
 
+    Route::get('redirect', ['uses'=>'SignaliController@redirect', 'as'=>'redirect']);
+
     
 
     Route::group(['middleware' => ['active_session']], function() {
@@ -33,6 +35,8 @@
             Route::post('create', 'SignaliController@store');
 
             Route::get('/signal/{id}', ['uses'=>'SignaliController@show_one', 'as'=>'signal']);
+
+           
 
     });
 

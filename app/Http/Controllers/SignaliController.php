@@ -143,7 +143,7 @@ class SignaliController extends Controller
         // return view( 'signali.create');
     }
 
-    public function restrict(Request $request){
+    public function redirect(Request $request){
 
         $data = [
             'title' => 'Тел. 112 - Без права',
